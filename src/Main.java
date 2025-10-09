@@ -20,6 +20,7 @@ public class Main {
 
         frame = new JFrame("University Portal");
         frame.setSize(600,400);
+        frame.setResizable(false);
         frame.setLayout(new BorderLayout());
         frame.setBackground(SUBTLE_GRAY_BLUE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,8 +35,16 @@ public class Main {
         topPanel.add(instituteLabel, BorderLayout.CENTER);
         inPanel = new JPanel();
         inPanel.setLayout(new BorderLayout());
+
         signupButton = new JButton("Signup");
         signupButton.setBackground(SOFT_LILAC);
+        signupButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SignUp newSignUp = new SignUp(frame);
+                frame.setVisible(false);
+            }
+        });
         inPanel.add(signupButton, BorderLayout.EAST);
 
         logiButton = new JButton("Login");
@@ -43,7 +52,7 @@ public class Main {
         logiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login newLogin = new Login(frame);
+                UserTypeSelection usertypeSelec = new UserTypeSelection(frame);
                 frame.setVisible(false);
             }
         });
@@ -61,6 +70,7 @@ public class Main {
         bottomPanel.add(abouTextArea, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.WEST);
 
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);    
     }
 

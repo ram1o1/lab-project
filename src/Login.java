@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 
 
 public class Login {
-    public Login(JFrame previousFrame) {
+    public Login(JFrame previousFrame, String userType) {
         JFrame frame;
         JPanel logiPanel, inputPanel, buttonPanel;
-        JLabel usernamLabel, passwordlLabel;
+        JLabel usernamLabel, passwordlLabel, statusLabel;
         JTextField usernameField, passwordField;
         JButton backButton, logiButton;
 
@@ -24,7 +24,7 @@ public class Login {
         logiPanel.setLayout(new BorderLayout());
 
         inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(2,2));
+        inputPanel.setLayout(new GridLayout(3,2));
         usernamLabel = new JLabel("Username ");
         inputPanel.add(usernamLabel);
         usernameField = new JTextField();
@@ -33,6 +33,8 @@ public class Login {
         inputPanel.add(passwordlLabel);
         passwordField = new JTextField();
         inputPanel.add(passwordField);
+        statusLabel = new JLabel();
+        inputPanel.add(statusLabel);
         logiPanel.add(inputPanel, BorderLayout.CENTER);
 
         buttonPanel = new JPanel();
@@ -49,6 +51,26 @@ public class Login {
         buttonPanel.add(backButton);
 
         logiButton = new JButton("Login ");
+        logiButton.addActionListener(e -> {
+            String usernameInput = usernameField.getText().trim();
+            String passwordInput = passwordField.getText().trim();
+
+            if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
+                statusLabel.setText("incorrect!!!");
+            }
+            else {
+                statusLabel.setText(null);
+                if (userType == "student") {
+                    LoginAuthentication.StudentAuthentication(usernameInput, passwordInput);
+                }
+                else if (userType == "prof") {
+                    LoginAuthentication.ProfessorAuthentication(usernameInput, passwordInput);
+                } else if (userType == "admin") {
+                    LoginAuthentication.AdministratorAuthentication(usernameInput, passwordInput);
+                }
+            }
+
+        });
         buttonPanel.add(logiButton);
 
         logiPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -61,6 +83,7 @@ public class Login {
             }
         });
 
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
