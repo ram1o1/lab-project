@@ -41,7 +41,7 @@ public class Main {
         signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SignUp newSignUp = new SignUp(frame);
+                UserTypeSelection usertypeSelec = new UserTypeSelection(frame,"signup");
                 frame.setVisible(false);
             }
         });
@@ -52,7 +52,7 @@ public class Main {
         logiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserTypeSelection usertypeSelec = new UserTypeSelection(frame);
+                UserTypeSelection usertypeSelec = new UserTypeSelection(frame,"login");
                 frame.setVisible(false);
             }
         });

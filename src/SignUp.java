@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 
 public class SignUp {
-    public SignUp(JFrame previousFrame) {
+    public SignUp(JFrame previousFrame, String userType) {
         JFrame frame;
         JPanel signUpPanel, inputPanel, buttonPanel;
         JLabel usernamLabel, passwordlLabel;
@@ -17,6 +17,7 @@ public class SignUp {
         frame = new JFrame();
         frame.setSize(600,400);
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         frame.setLayout(new BorderLayout());
 

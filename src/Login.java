@@ -13,6 +13,7 @@ public class Login {
         JLabel usernamLabel, passwordlLabel, statusLabel;
         JTextField usernameField, passwordField;
         JButton backButton, logiButton;
+        
 
         frame = new JFrame();
         frame.setSize(600,400);
@@ -56,17 +57,23 @@ public class Login {
             String passwordInput = passwordField.getText().trim();
 
             if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
-                statusLabel.setText("incorrect!!!");
+                statusLabel.setText("empty field!!!!");
             }
             else {
                 statusLabel.setText(null);
                 if (userType == "student") {
-                    LoginAuthentication.StudentAuthentication(usernameInput, passwordInput);
+                    if (!LoginAuthentication.StudentAuthentication(usernameInput, passwordInput)) {
+                        statusLabel.setText("Incorrrect Credentials!!");
+                    }
                 }
                 else if (userType == "prof") {
-                    LoginAuthentication.ProfessorAuthentication(usernameInput, passwordInput);
+                    if (!LoginAuthentication.ProfessorAuthentication(usernameInput, passwordInput)) {
+                        statusLabel.setText("Incorrect credentials!!");
+                    }
                 } else if (userType == "admin") {
-                    LoginAuthentication.AdministratorAuthentication(usernameInput, passwordInput);
+                    if(!LoginAuthentication.AdministratorAuthentication(usernameInput, passwordInput)) {
+                        statusLabel.setText("Incorrect Credentials!!");
+                    }
                 }
             }
 
