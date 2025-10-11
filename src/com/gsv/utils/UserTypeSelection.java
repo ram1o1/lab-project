@@ -80,7 +80,6 @@ public class UserTypeSelection {
             }
         });
 
-        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     } 
 }
