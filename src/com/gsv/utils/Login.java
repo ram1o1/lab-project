@@ -1,4 +1,7 @@
+package com.gsv.utils;
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -45,7 +48,7 @@ public class Login {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main mainWindow = new Main();
+                previousFrame.setVisible(true);
                 frame.dispose();
             }
         });

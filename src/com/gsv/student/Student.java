@@ -1,3 +1,5 @@
+package com.gsv.student;
+
 public class Student {
     private String RollNUm;
     private String Name;

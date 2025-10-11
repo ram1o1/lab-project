@@ -1,4 +1,8 @@
+package com.gsv.utils;
 import javax.swing.*;
+
+import com.gsv.student.StudentSignUp;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -29,7 +33,7 @@ public class UserTypeSelection {
                     Login newLogin = new Login(frame, "student");
                 }
                 else if (accountType == "signup") {
-                    SignUp newSignup = new SignUp(frame, "student");
+                    StudentSignUp.studentSignUp(frame);
                 }
                 frame.dispose();
             }
@@ -44,7 +48,7 @@ public class UserTypeSelection {
                     Login newLogin = new Login(frame, "prof");
                 }
                 else if (accountType == "signup") {
-                    SignUp newSignup = new SignUp(previousFrame, "prof");
+                    
                 }
                 frame.dispose();
             } 
@@ -55,7 +59,13 @@ public class UserTypeSelection {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login newLogin = new Login(frame, "admin");
+                if (accountType == "login") {
+                    Login newLogin = new Login(frame, "admin");
+                }
+                else if (accountType == "signup") {
+
+                }
+                
                 frame.dispose();
             }
         });

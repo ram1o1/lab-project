@@ -1,4 +1,9 @@
+package com.gsv.utils;
 import java.sql.*;
+
+import com.gsv.admin.Admin;
+import com.gsv.professor.Professor;
+import com.gsv.student.Student;
 
 public class LoginAuthentication {
     public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
