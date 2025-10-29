@@ -1,12 +1,14 @@
 import javax.swing.*;
 
-import com.gsv.utils.UserTypeSelection;
+import com.gsv.utils.Login;
+import com.gsv.student.StudentSignUp;
+import com.gsv.professor.ProfessorSignUp; // Added for completeness in Signup menu
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+
+// Note: Removed unused imports related to WindowAdapter/WindowEvent from Main.java as they are no longer needed here.
 
 public class Main {
     public Main () {
@@ -39,13 +41,52 @@ public class Main {
         inPanel = new JPanel();
         inPanel.setLayout(new BorderLayout());
 
+
+        JPopupMenu loginMenu = new JPopupMenu();        
+        JMenuItem studentLoginItem = new JMenuItem("Student Login");
+        studentLoginItem.addActionListener(e -> {
+            new Login(frame, "student");
+            frame.setVisible(false);
+        });
+        loginMenu.add(studentLoginItem);
+        JMenuItem professorLoginItem = new JMenuItem("Professor Login");
+        professorLoginItem.addActionListener(e -> {
+            new Login(frame, "prof");
+            frame.setVisible(false);
+        });
+        loginMenu.add(professorLoginItem);
+        JMenuItem adminLoginItem = new JMenuItem("Admin Login");
+        adminLoginItem.addActionListener(e -> {
+            new Login(frame, "admin");
+            frame.setVisible(false);
+        });
+        loginMenu.add(adminLoginItem);
+        
+        JPopupMenu signupMenu = new JPopupMenu();
+        JMenuItem studentSignupItem = new JMenuItem("Student Signup");
+        studentSignupItem.addActionListener(e -> {
+            StudentSignUp.studentSignUp(frame);
+            frame.setVisible(false);
+        });
+        signupMenu.add(studentSignupItem);
+        JMenuItem professorSignupItem = new JMenuItem("Professor Signup");
+        professorSignupItem.addActionListener(e -> {
+            ProfessorSignUp.professorSignUp(frame); 
+            frame.setVisible(false);
+        });
+        signupMenu.add(professorSignupItem);
+        JMenuItem adminSignupItem = new JMenuItem("Admin Signup");
+        adminSignupItem.addActionListener(e -> {
+        });
+        signupMenu.add(adminSignupItem);
+
+
         signupButton = new JButton("Signup");
         signupButton.setBackground(SOFT_LILAC);
         signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserTypeSelection usertypeSelec = new UserTypeSelection(frame,"signup");
-                frame.setVisible(false);
+                signupMenu.show(signupButton, 0, signupButton.getHeight());
             }
         });
         inPanel.add(signupButton, BorderLayout.EAST);
@@ -55,8 +96,7 @@ public class Main {
         logiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserTypeSelection usertypeSelec = new UserTypeSelection(frame,"login");
-                frame.setVisible(false);
+                loginMenu.show(logiButton, 0, logiButton.getHeight());
             }
         });
         inPanel.add(logiButton, BorderLayout.WEST);
