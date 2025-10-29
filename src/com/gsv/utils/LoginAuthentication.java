@@ -62,7 +62,7 @@ public class LoginAuthentication {
         ResultSet rs = null;
         boolean isAuthenticated = false;
 
-        String sql_query = "SELECT * FROM ProfLoginData WHERE email_id = ? AND password = ?";
+        String sql_query = "SELECT * FROM ProfessorsLoginData WHERE email_id = ? AND password = ?";
 
         try {
             con = getConnection();
@@ -98,7 +98,7 @@ public class LoginAuthentication {
         ResultSet rs = null;
         boolean isAuthenticated = false;
 
-        String sql_query = "SELECT * FROM AdminLoginData WHERE email_id = ? AND password = ?";
+        String sql_query = "SELECT * FROM AdminLoginData WHERE username = ? AND password = ?";
 
         try {
             con = getConnection();

@@ -75,11 +75,7 @@ public class Main {
             frame.setVisible(false);
         });
         signupMenu.add(professorSignupItem);
-        JMenuItem adminSignupItem = new JMenuItem("Admin Signup");
-        adminSignupItem.addActionListener(e -> {
-        });
-        signupMenu.add(adminSignupItem);
-
+        // REMOVED: JMenuItem adminSignupItem and its action listener
 
         signupButton = new JButton("Signup");
         signupButton.setBackground(SOFT_LILAC);
