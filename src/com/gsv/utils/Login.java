@@ -1,6 +1,8 @@
 package com.gsv.utils;
 import javax.swing.*;
 
+import com.gsv.student.Student; // ADDED import for Student dashboard
+import com.gsv.utils.LoginAuthentication; // Added for clarity
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -64,18 +66,30 @@ public class Login {
             }
             else {
                 statusLabel.setText(null);
-                if (userType == "student") {
-                    if (!LoginAuthentication.StudentAuthentication(usernameInput, passwordInput)) {
-                        statusLabel.setText("Incorrrect Credentials!!");
+                if (userType.equals("student")) {
+                    Integer studentId = LoginAuthentication.getAuthenticatedStudentId(usernameInput, passwordInput);
+                    
+                    if (studentId == null) {
+                        statusLabel.setText("Incorrect Credentials!!");
+                    } else {
+                        // Success: Close login frame and open student dashboard
+                        frame.dispose();
+                        new Student(studentId, previousFrame); 
                     }
                 }
-                else if (userType == "prof") {
+                else if (userType.equals("prof")) {
                     if (!LoginAuthentication.ProfessorAuthentication(usernameInput, passwordInput)) {
                         statusLabel.setText("Incorrect credentials!!");
+                    } else {
+                        statusLabel.setText("Login Successful (Professor)");
+                        // Add professor dashboard instantiation here
                     }
-                } else if (userType == "admin") {
+                } else if (userType.equals("admin")) {
                     if(!LoginAuthentication.AdministratorAuthentication(usernameInput, passwordInput)) {
                         statusLabel.setText("Incorrect Credentials!!");
+                    } else {
+                        statusLabel.setText("Login Successful (Admin)");
+                        // Add admin dashboard instantiation here
                     }
                 }
             }

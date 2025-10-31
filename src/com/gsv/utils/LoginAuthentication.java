@@ -1,9 +1,7 @@
 package com.gsv.utils;
 import java.sql.*;
 
-import com.gsv.admin.Admin;
-import com.gsv.professor.Professor;
-import com.gsv.student.Student;
+// Removed Admin, Professor, Student imports as they are no longer instantiated here.
 
 public class LoginAuthentication {
     public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -21,13 +19,14 @@ public class LoginAuthentication {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
     
-    public static boolean StudentAuthentication(String userName, String password) {
+    // New method to retrieve the student_id upon successful login
+    public static Integer getAuthenticatedStudentId(String userName, String password) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        boolean isAuthenticated = false;
+        Integer studentId = null;
 
-        String sql_query = "SELECT * FROM StudentLoginData WHERE email_id = ? AND password = ?";
+        String sql_query = "SELECT student_id FROM StudentLoginData WHERE email_id = ? AND password = ?";
 
         try {
             con = getConnection();
@@ -35,10 +34,9 @@ public class LoginAuthentication {
             stmt.setString(1, userName);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
-            isAuthenticated = rs.next();
-
-            if (isAuthenticated) {
-                Student stud = new Student(rs.getInt(1));
+            
+            if (rs.next()) {
+                studentId = rs.getInt(1); // Get the student_id
             }
 
         } catch (SQLException ex) {
@@ -53,9 +51,15 @@ public class LoginAuthentication {
             }
         }
 
-        return isAuthenticated;
+        return studentId; // Returns student_id or null
     }
 
+    public static boolean StudentAuthentication(String userName, String password) {
+        // Now just checks if a student ID is returned
+        return getAuthenticatedStudentId(userName, password) != null;
+    }
+
+    // Professor and Admin authentication methods remain mostly the same for backward compatibility
     public static boolean ProfessorAuthentication(String userName, String password) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -71,10 +75,6 @@ public class LoginAuthentication {
             stmt.setString(2, password);
             rs = stmt.executeQuery();
             isAuthenticated = rs.next();
-
-            if (isAuthenticated) {
-                Professor proff = new Professor(rs.getInt(1));
-            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -107,10 +107,6 @@ public class LoginAuthentication {
             stmt.setString(2, password);
             rs = stmt.executeQuery();
             isAuthenticated = rs.next();
-
-            if (isAuthenticated) {
-                Admin admin = new Admin(rs.getInt(1));
-            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
